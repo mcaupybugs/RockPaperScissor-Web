@@ -1,0 +1,31 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camera</title>
+    <style type="text/css">
+      #container {
+        margin: 0px auto;
+        width: 128px;
+        height: 128px;
+        border: 10px #333 solid;
+      }
+      #video {
+        width: 128px;
+        height: 128px;
+        background-color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img width="128" height="128" src={%static "me.png"%}></img>
+    </div>
+    <button id="snap"><a href="/predict">Snap Photo</a></button>
+    <canvas id="canvas" width="128" height="128"></canvas>
+  </body>
+</html>

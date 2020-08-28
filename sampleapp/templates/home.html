@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Camera</title>
@@ -19,13 +18,72 @@
         height: 128px;
         background-color: #666;
       }
+      .mt{
+        margin-top: 20px;
+      }
     </style>
   </head>
-  <body>
-    <div id="container">
-      <img width="128" height="128" src={%static "me.png"%}></img>
+  <body style="background-color: #333;">
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Rock Paper Scissor Game</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div class="container mt">
+      <div class="row">
+      <div class="col">
+        <div class="card" style="width: 20rem;margin-left: 20px;">
+          <img class="card-img-top" width="128"  height="200" src={%static "me.png"%}></img>
+          <div class="card-body">
+            <h5 class="card-title">Take Image from webcam</h5>
+            <p class="card-text">Keep your hand in front of webcam to take a Image</p>
+            <a class="btn btn-dark" href="/predict">Snap Photo</a>
+          </div>      
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 20rem;margin-left: 20px;">
+          <img class="card-img-top" width="128" height="200" src={%static "upload.png"%}></img>
+          <div class="card-body">
+            <h5 class="card-title">Upload Image</h5>
+            <p class="card-text">Upload an Image here which you want to predict</p>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+               {{ form.as_p }}
+              <button type="submit">Upload</button>
+            </form>
+            
+            {% if img_obj %}
+              <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+              <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+            {% endif %}
+            <!-- <a class="btn btn-dark" href="/predict">Upload Photo</a> -->
+          </div>      
+        </div>
+      </div>
     </div>
-    <button id="snap"><a href="/predict">Snap Photo</a></button>
-    <canvas id="canvas" width="128" height="128"></canvas>
+    <div class="row">
+      <div>
+        {%if result%}
+        <h1 class="text-light">It is a {{result}}</h1>
+        {% endif %}
+      <br>
+      {%if result == 'rock'%}
+      <img height="400" width="400" src={%static "rock.png"%}
+      {%elif result == 'paper' %}
+      <img height="400" width="400" src={%static "paper.png"%}
+      {%elif result == 'scissors' %}
+      <img height="400" width="400" src={%static "scissors.png"%}
+      {% endif %}
+      
+    </div>
+    </div>
+    </div>
+  </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </html>

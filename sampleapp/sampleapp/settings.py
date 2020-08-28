@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b3m^3xo_#q3_s8#wdkyk=nfn9v(uo*5+z&jy3%!hcdvzkk1=7p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+SECRET_KEY = 'b3m^3xo_#q3_s8#wdkyk=nfn9v(uo*5+z&jy3%!hcdvzkk1=7p'
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sampleapp'
 ]
 
 MIDDLEWARE = [
@@ -123,4 +124,4 @@ STATICFILES_DIRS = [
     '/sampleapp/static'
 ]
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
